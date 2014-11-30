@@ -1,0 +1,196 @@
+{EPITECH.}
+Projet		bdsh
+A réaliser seul.
+Langage: Shell sh
+Nom de l'exécutable: bdsh.sh
+Système de rendu : blih
+Repository : B3-BDSH-2013
+Forum : B3 - Shell Script
+------------------------------------------------------------
+
+Synopsis
+
+   bdsh.sh [-k] [-f <db_file>] (put (<clef> | $<clef>) (<valeur> | $<clef>) |
+                                del (<clef> | $<clef>) [<valeur> | $<clef>] |
+                                select [<expr> | $<clef>] |
+								flush)
+
+
+	Il s'agit d'écrire un script shell émulant les fonctionnalités simples
+ d'une base de données. Cette base sera contenue dans un unique fichier
+ "sh.db" dont on pourra éventuellement passer le nom en paramètre grâce à
+ l'option `-f'.
+
+   Les paramètres du script seront les suivants: 
+
+    - put <clef> <valeur> - Ajoute une clef <clef> contenant la valeur 
+    <valeur>. Si la clef existe déjà, la valeur est écrasée.
+    Rien n'est affiché.
+
+    - del <clef> [<valeur>] - Efface la clef <clef>. Si la valeur est omise,
+    la clef reste présente sans contenu. Si la clef n'existe pas ou si la
+    valeur ne correspond pas à celle de la clef, il ne se passe rien.
+    Rien n'est affiché.
+
+    - select [<expr>] - Permet d'afficher les valeurs dont les clefs
+    matchent <expr>, ou toutes les valeurs si aucun paramètre n'est passé.
+    C'est le matching de la commande grep qui est utilisé. On utilisera
+    pour l'affichage l'ordre du fichier, qui sera l'ordre chronologique
+    d'insertion ou de modification.
+	
+	flush - Vide toutes les entrées présentes dans la base. Le fichier lui
+    même n'est pas supprimé.
+
+   Lorsqu'une valeur doit être affichée, elle est seule sur une ligne.
+   Si l'option `-k' est activée, la clef doit aussi être affichée de la
+   façon suivante :
+   <clef>=<valeur>
+   Pas d'espace ou autres caractères mis à part le '=' entre la clef et sa valeur.
+
+   Il vous faudra également gérer :
+     ./bdsh.sh put <clef> $<clef_existante>
+     ./bdsh.sh put $<clef_1> $<clef_2>
+     ./bdsh.sh del <clef> $<clef>
+     ./bdsh.sh del $<clef_1> $<clef_2>
+     ./bdsh.sh select $<clef>
+
+    La commande select ne mélange pas les clefs et les expressions régulières.
+    C'est le $ en début d'expression qui détermine si c'est une clef ou non.
+
+     Exemple :  ./bdsh.sh put key1 val1
+                ./bdsh.sh put key2 '$key1'
+                ./bdsh.sh put '$key2' key1
+                ./bdsh.sh select "ey"
+                val1
+                val1
+                ./bdsh.sh select "1"
+                val1
+                key1
+                ./bdsh.sh select '$key2'
+                val1
+                ./bdsh.sh select '[2-9]$'
+                val1
+
+   Traitement correct des erreurs
+    messages : "Syntax error : Usage ...."
+               "No such key : ..."           pour les $<clef> non existantes
+               "No base found : file ..."
+    La première partie du message jusqu'à : (2 points) devra être identique.
+
+   Le programme doit se terminer avec un exit(0) si tout se passe bien ou un
+   exit(1) si il y a une erreur.
+
+   Vous ne pouvez utiliser que certaines commandes pour réaliser votre
+   programme. Afin de savoir si une commande est autorisée, connectez-vous
+   au serveur du bdsh grâce à la commande telnet, suivant le schéma suivant:
+
+    $ telnet 10.2.1.42 42000                <== Pour se connecter au serveur
+    Trying 10.2.1.42...
+    Connected to 10.2.1.42.
+    Escape character is '^]'.
+    Quel programme souhaitez vous utiliser ?
+    $> echo                                 <== Saisissez le nom du programme
+    Ce programme est autorisé
+    Connection closed by foreign host.
+    $
+
+   Les réponses possibles sont "autorisé" ou "non autorisé".
+
+   Votre bdsh commencera obligatoirement par la ligne
+    #!/bin/sh
+   Pas de tcsh, ksh, csh ou tout autre forme de shell ou d'exécutable.
+   Ni votre shell de tek1 ( :-) ).
+
+
+*** Bonus ***
+    - reprogrammer cut en shellscript (et ne plus utiliser la commande cut ..)
+    - stocker la base de données dans le programme lui-même
+    - crypter les données ( rien qu'en shell :-) )
+
+    Pour faire valider vos options, créez dans votre répertoire de rendu
+    un fichier vide avec un des 3 noms suivants :
+         ".cut" ".internal" ".crypt"
+    en fonction de/des option(s) réalisée(s).
+
+*** Utilisation de la moulinette ***
+
+    Attention : Ceci est une moulinette de test. Il se peut qu'il y reste
+	quelques bugs. En cas de doute, et si vous avez des questions sur certains
+	cas ou resultats, posez votre question sur le forum !
+
+	Téléchargez la moulinette de test et des jeux de test. Pensez à mettre les
+	droits en exécution ! La moulinette est elle aussi un script shell ;)
+	
+    La moulinette prend en paramètre 2 arguments : le nom de votre programme
+	(normalement "bdsh.sh") et un fichier de test. Votre BDSH et le fichier de
+	test doit obligatoirement se trouver dans le même répertoire que la
+	moulinette
+
+	Exemple :
+    (aymeric@openSUSE-3 508)./moul.sh bdsh.sh test0-1.bdsh
+    Testing bdsh.sh with test0-1.bdsh test file...
+    Cleaning the database sh.db...
+    # empty...
+    ---------- TEST 0-0  ---------------------
+    COMMAND : flush
+    RESULT : No output
+    YOUR RESULT : Ok
+    # Basic test set
+    ---------- TEST 1-1  ---------------------
+    COMMAND : put key1-1 val1-1
+    RESULT : No output
+    YOUR RESULT : Ok
+    ---------- TEST 1-2  ---------------------
+    COMMAND : put key1-2 val1-2
+    RESULT : No output
+    YOUR RESULT : Ok
+    ---------- TEST 1-3  ---------------------
+    COMMAND : select key1-1
+    RESULT : 1 line
+      - val1-1
+    YOUR RESULT : Ok
+    ---------- TEST 1-4  ---------------------
+    COMMAND : select key1-2
+    RESULT : 1 line
+      - val1-2
+    YOUR RESULT : Ok
+    #
+    ----------------------------------------
+    End
+
+	Dans chaques tests, vous retrouverez les infos suivantes :
+	COMMAND : La ligne de commande qui est passé lors de l'exécution de bdsh.sh
+	RESULT : Le résultat attendu :
+	  => No output : votre bdsh ne doit rien afficher à l'écran
+	  => X line : votre bdsh doit renvoyer X ligne(s). Les lignes attendues
+              	  sont affichées juste en dessous
+	  => Syntax error : votre bdsh doit afficher une erreur
+    YOUR RESULT : Le résultat de votre bdsh :
+	  => Ok : Votre bdsh s'est comporté comme attendu - Le test à réussi
+	  => Error : Votre bdsh ne s'est pas comporté comme prévu. Le test à échoué
+	
+	Si le résultat attendu n'est pas bon, la moulinette vous proposera
+	d'afficher le résultat de votre bdsh ainsi qu'un diff entre les résultats
+	
+*** Les batteries de test ***
+
+	Un premier jeu de test est disponible au même endroit que la moulinette.
+	Tout au long du rush, de nouveaux jeux de test, de plus en plus compliqués
+	seront mis à disposition au même endroit.
+	
+*** Le rendu ***
+	
+	Vous devez utiliser le système de rendu blih du bocal.
+	https://intra-bocal.epitech.eu/index.php?pgid=docvisu&m_doc_id=162
+	(si ce lien ne fonctionne plus, faite une recherche sur blih dans
+	l'espace documentation de l'intranet Bocal)	
+    Une documentation plus détaillée est disponible sur l'intra Epitech :
+	https://intra.epitech.eu/file/public/rendu/comment-rendre.pdf
+	Lisez bien cette documentation, et surtout, la partie FAQ concernant
+	les droits à mettre pour que le ramassage puisse se faire !
+	
+*** Questions / Réponses ***
+
+    Utilisez le forum de l'intra : Forum : B3 - Shell Script
+	
+*** End ***
