@@ -4,6 +4,7 @@ SUCCESS=0;
 FAILURE=1;
 print_key=0;
 file_name='sh.db';
+separator=$(echo -en "\002");
 
 function syntax_error()
 {
@@ -17,13 +18,13 @@ function db_put()
     then
 	syntax_error;
     else
-	existing_key=$(cat $file_name | grep "^$1" | cut -d ' ' -f1);
+	existing_key=$(cat $file_name | grep "^$1" | cut -d $separator -f1);
 	if [ "$existing_key" == "$1" ]
 	then
 	    echo "existing key";
 	    # replace it
 	else
-	    echo "$1 $2" >> $file_name;
+	    echo "$1"$separator"$2" >> $file_name;
 	fi
     fi
 }
