@@ -3,6 +3,7 @@
 SUCCESS=0;
 FAILURE=1;
 print_key=0;
+current_value_for_key='undefined';
 file_name='sh.db';
 separator=$(echo -en "\002");
 
@@ -12,15 +13,33 @@ function syntax_error()
     exit $FAILURE;
 }
 
+function key_error()
+{
+    echo -e "No such key : $1";
+    exit $FAILURE;
+}
+
+function get_key_value()
+{
+    key=$(echo $1 | cut -c 2-);
+    if [ "$(cat $file_name | grep "^$key" | cut -d $separator -f1)" == "$key" ]
+    then
+	current_value_for_key=$(cat $file_name | grep "^$key" | cut -d $separator -f2);
+    else
+	key_error $key;
+    fi
+}
+
 function db_put()
 {
     if [ $# -lt 2 ]
     then
 	syntax_error;
     else
-	existing_key=$(cat $file_name | grep "^$1" | cut -d $separator -f1);
-	if [ "$existing_key" == "$1" ]
+	if [ "$(echo $1 | cut -c 1)" == '$' ]
 	then
+	    get_key_value "$1";
+	    # existing key
 	    echo "existing key";
 	    # replace it
 	else
