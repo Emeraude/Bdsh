@@ -21,8 +21,13 @@ function key_error()
 
 function get_key_value()
 {
-    key=$(echo $1 | cut -c 2-);
-    if [ "$(cat $file_name | grep "^$key" | cut -d $separator -f1)" == "$key" ]
+    if [ "$(echo $1 | cut -c 1)" == '$' ]
+    then
+	key=$(echo $1 | cut -c 2-);
+    else
+	key=$1;
+    fi
+    if [ "$(grep "^$key" $file_name | cut -d $separator -f1)" == "$key" ]
     then
 	current_value_for_key=$(cat $file_name | grep "^$key" | cut -d $separator -f2);
     else
@@ -30,6 +35,7 @@ function get_key_value()
     fi
 }
 
+# TODO
 function db_put()
 {
     if [ $# -lt 2 ]
@@ -48,6 +54,7 @@ function db_put()
     fi
 }
 
+# TODO
 function db_del()
 {
     echo "not implemented yet";
@@ -55,7 +62,32 @@ function db_del()
 
 function db_select()
 {
-    echo "not implemented yet";
+    if [ $# -eq 1 ]
+    then
+	if [ "$(echo $1 | cut -c 1)" == '$' ]
+	then
+	    get_key_value "$1";
+	    if [ $print_key -eq 1 ]
+	    then
+		echo -n $key'=';
+	    fi
+	    echo $current_value_for_key;
+	else
+	    lines=$(cut -d $separator -f1 < $file_name | grep $1);
+	    for line in ${lines[@]}
+	    do
+		get_key_value "$line";
+		if [ $print_key -eq 1 ]
+		then
+		    echo -n $key'=';
+		fi
+		echo $current_value_for_key;
+	    done
+	fi
+    else
+	echo -en;
+	#on echo toutes les valeurs
+    fi
 }
 
 function db_flush()
