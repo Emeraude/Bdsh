@@ -85,8 +85,12 @@ function db_select()
 	    done
 	fi
     else
-	echo -en;
-	#on echo toutes les valeurs
+	if [ $print_key -eq 1 ]
+	then
+	    tr $separator '=' < $file_name;
+	else
+	    cut -d $separator -f2 < $file_name;
+	fi
     fi
 }
 
