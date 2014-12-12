@@ -38,7 +38,7 @@ function get_key_value()
 # TODO
 function db_put()
 {
-    if [ $# -lt 2 ]
+    if [ $# -ne 2 ]
     then
 	syntax_error;
     else
@@ -57,6 +57,15 @@ function db_put()
 # TODO
 function db_del()
 {
+    if [ $# -eq 1 ]
+    then
+	echo -en;
+    elif [ $# -eq 2 ]
+    then
+	echo -en;
+    else
+	syntax_error;
+    fi
     echo "not implemented yet";
 }
 
@@ -92,6 +101,7 @@ function db_select()
 	    cut -d $separator -f2 < $file_name;
 	fi
     fi
+    exit $SUCCESS;
 }
 
 function db_flush()
@@ -100,6 +110,7 @@ function db_flush()
     exit $SUCCESS;
 }
 
+#TODO manage it in each case (-k after other options)
 av=("$@");
 i=0;
 while [ $i -lt $# ]
