@@ -66,7 +66,6 @@ function db_del()
 {
     if [ $# -eq 1 ]
     then
-	get_key_value "$1";
 	delete_key "$1";
 	echo "$1"$separator >> "$file_name";
     elif [ $# -eq 2 ]
