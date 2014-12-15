@@ -27,12 +27,19 @@ function get_key_value()
     else
 	key=$1;
     fi
-    if [ "$(grep "^$key" $file_name | cut -d $separator -f1)" == "$key" ]
+    if [ "$(grep "^$key" "$file_name" | cut -d $separator -f1)" == "$key" ]
     then
-	current_value_for_key=$(cat $file_name | grep "^$key" | cut -d $separator -f2);
+	current_value_for_key=$(cat "$file_name" | grep "^$key" | cut -d $separator -f2);
     else
 	key_error $key;
     fi
+}
+
+function delete_key()
+{
+    get_key_value "$1";
+    db=$(grep -v "^$key$separator" "$file_name" | cut -d ':' -f1)
+    echo $db > "$file_name";
 }
 
 # TODO
@@ -49,7 +56,7 @@ function db_put()
 	    echo "existing key";
 	    # replace it
 	else
-	    echo "$1"$separator"$2" >> $file_name;
+	    echo "$1"$separator"$2" >> "$file_name";
 	fi
     fi
 }
@@ -59,14 +66,15 @@ function db_del()
 {
     if [ $# -eq 1 ]
     then
-	echo -en;
+	get_key_value "$1";
+	delete_key "$1";
+	echo "$1"$separator >> "$file_name";
     elif [ $# -eq 2 ]
     then
 	echo -en;
     else
 	syntax_error;
     fi
-    echo "not implemented yet";
 }
 
 function db_select()
@@ -82,7 +90,7 @@ function db_select()
 	    fi
 	    echo $current_value_for_key;
 	else
-	    lines=$(cut -d $separator -f1 < $file_name | grep $1);
+	    lines=$(cut -d $separator -f1 < "$file_name" | grep $1);
 	    for line in ${lines[@]}
 	    do
 		get_key_value "$line";
@@ -96,9 +104,9 @@ function db_select()
     else
 	if [ $print_key -eq 1 ]
 	then
-	    tr $separator '=' < $file_name;
+	    tr $separator '=' < "$file_name";
 	else
-	    cut -d $separator -f2 < $file_name;
+	    cut -d $separator -f2 < "$file_name";
 	fi
     fi
     exit $SUCCESS;
@@ -106,7 +114,7 @@ function db_select()
 
 function db_flush()
 {
-    echo -n > $file_name;
+    echo -n > "$file_name";
     exit $SUCCESS;
 }
 
@@ -133,6 +141,9 @@ do
     elif [ "$a" == 'select' ]
     then
 	db_select ${av[`expr $i + 1`]} ${av[`expr $i + 2`]};
+    elif [ "$a" == 'del' ]
+    then
+	db_del ${av[`expr $i + 1`]} ${av[`expr $i + 2`]};
     elif [ "$a" == 'flush' ]
     then
 	db_flush;
