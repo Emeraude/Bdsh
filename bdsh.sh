@@ -27,7 +27,7 @@ function get_key_value()
     else
 	key=$1;
     fi
-    if [ "$(grep "^$key" "$file_name" | cut -d $separator -f1)" == "$key" ]
+    if [ "$(grep "^$key$separator" "$file_name" | cut -d $separator -f1)" == "$key" ]
     then
 	current_value_for_key=$(cat "$file_name" | grep "^$key" | cut -d $separator -f2);
     else
@@ -38,8 +38,8 @@ function get_key_value()
 function delete_key()
 {
     get_key_value "$1";
-    db=$(grep -v "^$key$separator" "$file_name" | cut -d ':' -f1)
-    echo $db > "$file_name";
+    grep -v "^$key$separator" "$file_name" | cut -d ':' -f1 > /tmp/"$file_name";
+    mv /tmp/"$file_name" "$file_name";
 }
 
 # TODO
