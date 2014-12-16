@@ -1,0 +1,59 @@
+#: empty...
+0-0:flush:0:
+#:
+1-1:put key1-1 val1-1:0:
+1-2:put key1-2 val1-2:0:
+1-5:select key:2:val1-1:val1-2:
+1-11:del key1-1 val1-1:0:
+1-12:select key1-1:0:
+#:
+#:
+2-6:del:-1:Syntax error :
+2-7:del a b c:-1:Syntax error :
+#:
+3-1:put key3-01 val3=01:0:
+3-2:put key3-02 val3_02:0:
+3-3:put key3-03 val3%p03:0:
+3-4:put key3-04 val3%d04:0:
+3-5:put key3-05 'val3#05':0:
+3-6:put key3-06 'val3@06':0:
+3-7:put key3-07 'val3$07':0:
+3-8:put key3-08 'val3;08':0:
+3-9:put key3-09 'val3"09':0:
+3-10:put key3-10 'val3 10':0:
+3-11:put key3-11 'val3!11':0:
+3-12:put key3-12 'val3.12':0:
+3-13:put key3-13 'val3^13':0:
+3-14:put key3-14 'val3+14':0:
+3-15:put key3-15 'val3*15':0:
+3-16:put key3-16 "val3'16":0:
+3-17:put key3-17 'val3`17':0:
+3-18:put key3-18 'val3~18':0:
+3-19:put key3-19 'val3\19':0:
+3-20:put key3-20 'val3/20':0:
+#:
+3-51:select key3-01:1:val3=01:
+3-52:select key3-02:1:val3_02:
+3-53:select key3-03:1:val3%p03:
+3-54:select key3-04:1:val3%d04:
+3-55:select key3-05:1:val3#05:
+3-56:select key3-06:1:val3@06:
+3-57:select key3-07:1:val3$07:
+3-58:select key3-08:1:val3;08:
+3-59:select key3-09:1:val3"09:
+3-60:select key3-10:1:val3 10:
+3-61:select key3-11:1:val3!11:
+3-62:select key3-12:1:val3.12:
+3-63:select key3-13:1:val3^13:
+3-64:select key3-14:1:val3+14:
+3-65:select key3-15:1:val3*15:
+3-66:select key3-16:1:val3'16:
+3-67:select key3-17:1:val3`17:
+3-68:select key3-18:1:val3~18:
+3-69:select key3-19:1:val3\19:
+3-70:select key3-20:1:val3/20:
+#:
+#:
+7-1:put key7-01 '':0:
+7-2:-k select key7-01:1:key7-01=:
+#:

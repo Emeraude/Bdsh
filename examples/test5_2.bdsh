@@ -1,0 +1,8 @@
+#: empty...
+0-0:flush:0:
+#:
+1-1:put key1-1 -e:0:
+1-2:select key1-1:1:-e:
+1-3:put -e val1-3:0:
+1-4:select -e:1:val1-3:
+#:

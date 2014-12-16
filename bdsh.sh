@@ -70,7 +70,12 @@ function db_del()
 	echo "$1"$separator >> "$file_name";
     elif [ $# -eq 2 ]
     then
-	echo -en;
+	if [ "$(echo $1 | cut -c 1)" == '$' ]
+	then
+	    echo -en;
+	else
+	    echo -en;
+	fi
     else
 	syntax_error;
     fi
