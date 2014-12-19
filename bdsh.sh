@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SUCCESS=0;
 FAILURE=1;
@@ -27,7 +27,7 @@ function get_key_value()
     else
 	key=$1;
     fi
-    if [ "$(grep "^$key$separator" "$file_name" | cut -d $separator -f1)" == "$key" ]
+    if [ "$(grep -a "^$key$separator" "$file_name" | cut -d $separator -f1)" == "$key" ]
     then
 	current_value_for_key=$(cat "$file_name" | grep "^$key" | cut -d $separator -f2);
     else
