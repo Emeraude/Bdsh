@@ -5,7 +5,7 @@ FAILURE=1;
 print_key=0;
 current_value_for_key='undefined';
 file_name='sh.db';
-separator=$(echo -en "\000");
+separator="\0";
 
 function syntax_error()
 {
