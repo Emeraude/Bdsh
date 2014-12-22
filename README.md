@@ -5,7 +5,7 @@
 ```bash
 sed -n Xp __FILE__ #X is line
 grep -a -P "\x00\x09" resTest
-cut -fd '' -f1 # cut on null characte
+cut -fd '' -f1 # cut on null character
 ```
 
 more tips in tricks.sh

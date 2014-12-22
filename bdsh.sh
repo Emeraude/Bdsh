@@ -9,14 +9,30 @@ separator="\0";
 
 function syntax_error()
 {
-    echo -e 'Syntax error :\nUsage : ./bdsh.sh [-k] [-f file_name] (put key|$key value|$key) | (del key|$key [value|$key]) | (select [expr|$key]) | flush';
+    echo 'Syntax error :\nUsage : ./bdsh.sh [-k] [-f file_name] (put key|$key value|$key) | (del key|$key [value|$key]) | (select [expr|$key]) | flush';
     exit $FAILURE;
 }
 
 function key_error()
 {
-    echo -e "No such key : $1";
+    echo  "No such key : $1";
     exit $FAILURE;
+}
+
+function file_error() {
+    echo "No base found : $file_name";
+    exit $FAILURE;
+}
+
+function write_value() {
+    if [ -w $file_name ]
+    then
+	echo -n $1 > $file_name;
+	echo -en $separator > $file_name;
+	echo $2 > $file_name;
+    else
+	file_error;
+    fi
 }
 
 function get_key_value()
