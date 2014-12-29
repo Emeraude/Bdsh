@@ -25,42 +25,39 @@ function file_error() {
 }
 
 function write_value() {
-    if [ -w $file_name ]
+    if [ -f $file_name ]
     then
-	echo -n $1 > $file_name;
-	echo -en $separator > $file_name;
-	echo $2 > $file_name;
+	echo -n $1 >> $file_name;
+	echo -en $separator >> $file_name;
+	echo $2 >> $file_name;
     else
 	file_error;
     fi
 }
 
-function get_key_value()
-{
+function get_key_value() {
     if [ "$(echo $1 | cut -c 1)" == '$' ]
     then
 	key=$(echo $1 | cut -c 2-);
     else
 	key=$1;
     fi
-    if [ "$(grep -a "^$key$separator" "$file_name" | cut -d $separator -f1)" == "$key" ]
+    if [ "$(grep -a "^$key$separator" "$file_name" | cut -d '' -f1)" == "$key" ]
     then
-	current_value_for_key=$(cat "$file_name" | grep "^$key" | cut -d $separator -f2);
+	current_value_for_key=$(cat "$file_name" | grep "^$key" | cut -d '' -f2);
     else
 	key_error $key;
     fi
 }
 
-function delete_key()
-{
+function delete_key() {
     get_key_value "$1";
     grep -v "^$key$separator" "$file_name" | cut -d ':' -f1 > /tmp/"$file_name";
     mv /tmp/"$file_name" "$file_name";
 }
 
 # TODO
-function db_put()
-{
+function db_put() {
     if [ $# -ne 2 ]
     then
 	syntax_error;
@@ -72,14 +69,13 @@ function db_put()
 	    echo "existing key";
 	    # replace it
 	else
-	    echo "$1"$separator"$2" >> "$file_name";
+	    write_value $1 $2;
 	fi
     fi
 }
 
 # TODO
-function db_del()
-{
+function db_del() {
     if [ $# -eq 1 ]
     then
 	delete_key "$1";
@@ -97,8 +93,7 @@ function db_del()
     fi
 }
 
-function db_select()
-{
+function db_select() {
     if [ $# -eq 1 ]
     then
 	if [ "$(echo $1 | cut -c 1)" == '$' ]
@@ -110,7 +105,7 @@ function db_select()
 	    fi
 	    echo $current_value_for_key;
 	else
-	    lines=$(cut -d $separator -f1 < "$file_name" | grep $1);
+	    lines=$(cut -d '' -f1 < "$file_name" | grep $1);
 	    for line in ${lines[@]}
 	    do
 		get_key_value "$line";
@@ -126,14 +121,13 @@ function db_select()
 	then
 	    tr $separator '=' < "$file_name";
 	else
-	    cut -d $separator -f2 < "$file_name";
+	    cut -d '' -f2 < "$file_name";
 	fi
     fi
     exit $SUCCESS;
 }
 
-function db_flush()
-{
+function db_flush() {
     echo -n > "$file_name";
     exit $SUCCESS;
 }
