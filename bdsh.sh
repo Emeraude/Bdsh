@@ -4,6 +4,7 @@ SUCCESS=0;
 FAILURE=1;
 print_key=0;
 current_value_for_key='undefined';
+true_arg='';
 file_name='sh.db';
 separator="\0";
 
@@ -35,6 +36,19 @@ function write_value() {
     fi
 }
 
+function get_true_arg() {
+    if [ "$(echo $1 | cut -c 1)" == '$' ]
+    then
+	key=$(echo $1 | cut -c 2-);
+	if [ "$(grep -a "^$key$separator" "$file_name" | cut -d '' -f1)" == "$key" ]
+	then
+	    true_arg=$(cat "file_name" | grep -a "^key" | cut -d '' -f2);
+	else
+	    key_error $key;
+	fi
+    fi
+}
+
 function get_key_value() {
     if [ "$(echo $1 | cut -c 1)" == '$' ]
     then
@@ -42,9 +56,9 @@ function get_key_value() {
     else
 	key=$1;
     fi
-    if [ "$(grep -a "^$key$separator" "$file_name" | cut -d '' -f1)" == "$key" ]
+    if [ "$(grep -a "^$key" "$file_name" | cut -d '' -f1)" == "$key" ]
     then
-	current_value_for_key=$(cat "$file_name" | grep "^$key" | cut -d '' -f2);
+	current_value_for_key=$(cat "$file_name" | grep -a "^$key" | cut -d '' -f2);
     else
 	key_error $key;
     fi
@@ -94,7 +108,7 @@ function db_del() {
 }
 
 function db_select() {
-    if [ $# -eq 1 ]
+    if [ $# -ne 0 ]
     then
 	if [ "$(echo $1 | cut -c 1)" == '$' ]
 	then
@@ -105,7 +119,7 @@ function db_select() {
 	    fi
 	    echo $current_value_for_key;
 	else
-	    lines=$(cut -d '' -f1 < "$file_name" | grep $1);
+	    lines=$(cut -d '' -f1 < "$file_name" | grep "$1");
 	    for line in ${lines[@]}
 	    do
 		get_key_value "$line";
