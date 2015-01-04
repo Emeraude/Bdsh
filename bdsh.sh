@@ -8,14 +8,12 @@ true_arg='';
 file_name='sh.db';
 separator="\0";
 
-function syntax_error()
-{
+function syntax_error() {
     echo 'Syntax error :\nUsage : ./bdsh.sh [-k] [-f file_name] (put key|$key value|$key) | (del key|$key [value|$key]) | (select [expr|$key]) | flush';
     exit $FAILURE;
 }
 
-function key_error()
-{
+function key_error() {
     echo  "No such key : $1";
     exit $FAILURE;
 }
@@ -46,6 +44,8 @@ function get_true_arg() {
 	else
 	    key_error $key;
 	fi
+    else
+	true_arg="$1";
     fi
 }
 
@@ -72,7 +72,7 @@ function delete_key() {
 
 # TODO
 function db_put() {
-    if [ $# -ne 2 ]
+    if [ $# -lt 2 ]
     then
 	syntax_error;
     else
@@ -83,7 +83,7 @@ function db_put() {
 	    echo "existing key";
 	    # replace it
 	else
-	    write_value $1 $2;
+	    write_value "$1" "$2";
 	fi
     fi
 }
@@ -120,6 +120,8 @@ function db_select() {
 	    echo $current_value_for_key;
 	else
 	    lines=$(cut -d '' -f1 < "$file_name" | grep "$1");
+	    #DANGEROUS : REALLY WORK WITH SPACES ?
+	    #try with a simple grep
 	    for line in ${lines[@]}
 	    do
 		get_key_value "$line";
@@ -151,7 +153,7 @@ av=("$@");
 i=0;
 while [ $i -lt $# ]
 do
-    a=${av[$i]};
+    a="${av[$i]}";
     if [ "$a" == '-k' ] || [ "$a" == '--key' ]
     then
 	print_key=1;
@@ -161,17 +163,17 @@ do
 	then
 	    syntax_error;
 	fi
-	file_name=${av[`expr $i + 1`]};
+	file_name="${av[`expr $i + 1`]}";
 	i=`expr $i + 1`;
     elif [ "$a" == 'put' ]
     then
-	db_put ${av[`expr $i + 1`]} ${av[`expr $i + 2`]};
+	db_put "${av[`expr $i + 1`]}" "${av[`expr $i + 2`]}";
     elif [ "$a" == 'select' ]
     then
-	db_select ${av[`expr $i + 1`]} ${av[`expr $i + 2`]};
+	db_select "${av[`expr $i + 1`]}" "${av[`expr $i + 2`]}";
     elif [ "$a" == 'del' ]
     then
-	db_del ${av[`expr $i + 1`]} ${av[`expr $i + 2`]};
+	db_del "${av[`expr $i + 1`]}" "${av[`expr $i + 2`]}";
     elif [ "$a" == 'flush' ]
     then
 	db_flush;
