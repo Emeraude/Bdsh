@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh -x
+# todo : change shebang
 
 SUCCESS=0;
 FAILURE=1;
@@ -9,7 +10,7 @@ file_name='sh.db';
 separator="\0";
 
 function syntax_error() {
-    echo 'Syntax error :\nUsage : ./bdsh.sh [-k] [-f file_name] (put key|$key value|$key) | (del key|$key [value|$key]) | (select [expr|$key]) | flush';
+    echo 'Syntax error :\nUsage : ./bdsh.sh [-k] [-f file_name] (put key|$key value|$key) | (del key|$key [value|$key]) | (select [expr|$key]) | flush' 1>&2;
     exit $FAILURE;
 }
 

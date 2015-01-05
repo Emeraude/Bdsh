@@ -4,17 +4,8 @@ A réaliser seul.
 Langage: Shell sh
 Nom de l'exécutable: bdsh.sh
 Système de rendu : blih
-Repository : SHL_année_bdsh (ex: SHL_2014_bdsh pour l'année 2014-2015)
-Forum : B3 - Shell Script : A lire TRES régulièrement ! (plusieurs fois par jours !)
-
-------------------------------------------------------------
-
-Attention particulière sur le forum : 
-  * Seul les threads créé cette année seront lu / répondu / officiels !
-  * Ne répondez pas à un thread de l'an dernier: hormis poluer le forum, ça ne sert à rien
-  * Les réponses apportées les années passées pourraient vous induire en erreur (évolution
-  du sujet d'une année sur l'autre !
-
+Repository : B3-BDSH-2013
+Forum : B3 - Shell Script
 ------------------------------------------------------------
 
 Synopsis
@@ -105,21 +96,20 @@ Synopsis
 
    Les réponses possibles sont "autorisé" ou "non autorisé".
 
-   Votre bdsh commencera obligatoirement par le shebang :
-        #!/bin/sh
+   Votre bdsh commencera obligatoirement par la ligne
+    #!/bin/sh
    Pas de tcsh, ksh, csh ou tout autre forme de shell ou d'exécutable.
    Ni votre shell de tek1 ( :-) ).
-   (Un shebang ???? => http://fr.wikipedia.org/wiki/Shebang)
+
 
 *** Bonus ***
-    - reprogrammer cut en shellscript (et ne plus utiliser le programme cut ..)
+    - reprogrammer cut en shellscript (et ne plus utiliser la commande cut ..)
     - stocker la base de données dans le programme lui-même
-    - chiffrer les données ( rien qu'en shell :-) )
-    - les messages d'erreur ou "usage" s'affiche sur la sortie d'erreur
+    - crypter les données ( rien qu'en shell :-) )
 
     Pour faire valider vos options, créez dans votre répertoire de rendu
-    un fichier vide avec un des 4 noms suivants :
-         ".cut" ".internal" ".crypt" ".stderr"
+    un fichier vide avec un des 3 noms suivants :
+         ".cut" ".internal" ".crypt"
     en fonction de/des option(s) réalisée(s).
 
 *** Utilisation de la moulinette ***
@@ -133,7 +123,7 @@ Synopsis
 	
     La moulinette prend en paramètre 2 arguments : le nom de votre programme
 	(normalement "bdsh.sh") et un fichier de test. Votre BDSH et le fichier de
-	test doivent obligatoirement se trouver dans le même répertoire que la
+	test doit obligatoirement se trouver dans le même répertoire que la
 	moulinette
 
 	Exemple :
@@ -169,7 +159,7 @@ Synopsis
     End
 
 	Dans chaques tests, vous retrouverez les infos suivantes :
-	COMMAND : La ligne de commande qui est passée lors de l'exécution de bdsh.sh
+	COMMAND : La ligne de commande qui est passé lors de l'exécution de bdsh.sh
 	RESULT : Le résultat attendu :
 	  => No output : votre bdsh ne doit rien afficher à l'écran
 	  => X line : votre bdsh doit renvoyer X ligne(s). Les lignes attendues
@@ -190,9 +180,11 @@ Synopsis
 	
 *** Le rendu ***
 	
-	Vous devez utiliser le système de rendu blih du bocal. (Voir documentation
-	sur l'intra-bocal)
-	Une documentation plus détaillée est disponible sur l'intra Epitech :
+	Vous devez utiliser le système de rendu blih du bocal.
+	https://intra-bocal.epitech.eu/index.php?pgid=docvisu&m_doc_id=162
+	(si ce lien ne fonctionne plus, faite une recherche sur blih dans
+	l'espace documentation de l'intranet Bocal)	
+    Une documentation plus détaillée est disponible sur l'intra Epitech :
 	https://intra.epitech.eu/file/public/rendu/comment-rendre.pdf
 	Lisez bien cette documentation, et surtout, la partie FAQ concernant
 	les droits à mettre pour que le ramassage puisse se faire !
