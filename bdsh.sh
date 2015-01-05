@@ -10,7 +10,7 @@ file_name='sh.db';
 separator="\0";
 
 syntax_error() {
-    #TODO : color (man style)
+    #TODO : color (man style) (only after "Syntax error :")
     echo -e 'Syntax error :\nUsage : ./bdsh.sh [-k] [-f file_name] (put key|$key value|$key) | (del key|$key [value|$key]) | (select [expr|$key]) | flush' 1>&2;
     exit $FAILURE;
 }
@@ -68,7 +68,7 @@ get_key_value() {
 
 delete_key() {
     get_key_value "$1";
-    grep -v "^$key$separator" "$file_name" | cut -d ':' -f1 > /tmp/"$file_name";
+    grep -vaP "^$key$separator" "$file_name" > /tmp/"$file_name";
     mv /tmp/"$file_name" "$file_name";
 }
 
@@ -89,25 +89,28 @@ db_put() {
 	    write_value "$1" "$2";
 	fi
     fi
+    exit $SUCCESS;
 }
 
-# TODO
 db_del() {
     if [ $# -eq 1 ]
     then
-	delete_key "$1";
+	get_true_arg "$1";
+	echo $true_arg;
+	delete_key "$true_arg";
 	write_value "$1" '';
     elif [ $# -eq 2 ]
     then
-	if [ "$(echo $1 | cut -c 1)" == '$' ]
-	then
-	    echo -en;
-	else
-	    echo -en;
-	fi
+	get_true_arg "$1";
+	key="$true_arg";
+	get_true_arg "$2";
+	val="$true_arg";
+	grep -vaP "^$key$separator$val$" "$file_name" > /tmp/"$file_name";
+	mv /tmp/"$file_name" "$file_name";
     else
 	syntax_error;
     fi
+    exit $SUCCESS;
 }
 
 db_select() {
@@ -146,6 +149,7 @@ db_flush() {
 }
 
 #TODO manage it in each case (-k after other options)
+#ârsing is awful, recode it
 av=("$@");
 i=0;
 while [ $i -lt $# ]
