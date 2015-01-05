@@ -1,0 +1,510 @@
+#: empty...
+0-0:flush:0:
+#:
+1-001:put key-001 val001:0:
+1-002:put key-002 val002:0:
+1-003:put key-003 val003:0:
+1-004:put key-004 val004:0:
+1-005:put key-005 val005:0:
+1-006:put key-006 val006:0:
+1-007:put key-007 val007:0:
+1-008:put key-008 val008:0:
+1-009:put key-009 'val	009':0:
+1-011:put key-011 val011:0:
+1-012:put key-012 'val012':0:
+1-014:put key-014 val014:0:
+1-015:put key-015 val015:0:
+1-016:put key-016 val016:0:
+1-017:put key-017 val017:0:
+1-018:put key-018 val018:0:
+1-019:put key-019 val019:0:
+1-020:put key-020 val020:0:
+1-021:put key-021 val021:0:
+1-022:put key-022 val022:0:
+1-023:put key-023 val023:0:
+1-024:put key-024 val024:0:
+1-025:put key-025 val025:0:
+1-026:put key-026 val026:0:
+1-027:put key-027 val027:0:
+1-028:put key-028 val028:0:
+1-029:put key-029 val029:0:
+1-030:put key-030 val030:0:
+1-031:put key-031 val031:0:
+1-032:put key-032 'val 032':0:
+1-033:put key-033 'val!033':0:
+1-034:put key-034 'val"034':0:
+1-035:put key-035 'val#035':0:
+1-036:put key-036 'val$036':0:
+1-037:put key-037 'val%037':0:
+1-038:put key-038 'val&038':0:
+1-039:put key-039 "val'039":0:
+1-040:put key-040 'val(040':0:
+1-041:put key-041 'val)041':0:
+1-042:put key-042 'val*042':0:
+1-043:put key-043 'val+043':0:
+1-044:put key-044 'val,044':0:
+1-045:put key-045 'val-045':0:
+1-046:put key-046 'val.046':0:
+1-047:put key-047 'val/047':0:
+1-048:put key-048 val0048:0:
+1-049:put key-049 val1049:0:
+1-050:put key-050 val2050:0:
+1-051:put key-051 val3051:0:
+1-052:put key-052 val4052:0:
+1-053:put key-053 val5053:0:
+1-054:put key-054 val6054:0:
+1-055:put key-055 val7055:0:
+1-056:put key-056 val8056:0:
+1-057:put key-057 val9057:0:
+1-058:put key-058 val%d058:0:
+1-059:put key-059 'val;059':0:
+1-060:put key-060 'val<060':0:
+1-061:put key-061 'val=061':0:
+1-062:put key-062 'val>062':0:
+1-063:put key-063 'val?063':0:
+1-064:put key-064 'val@064':0:
+1-065:put key-065 valA065:0:
+1-066:put key-066 valB066:0:
+1-067:put key-067 valC067:0:
+1-068:put key-068 valD068:0:
+1-069:put key-069 valE069:0:
+1-070:put key-070 valF070:0:
+1-071:put key-071 valG071:0:
+1-072:put key-072 valH072:0:
+1-073:put key-073 valI073:0:
+1-074:put key-074 valJ074:0:
+1-075:put key-075 valK075:0:
+1-076:put key-076 valL076:0:
+1-077:put key-077 valM077:0:
+1-078:put key-078 valN078:0:
+1-079:put key-079 valO079:0:
+1-080:put key-080 valP080:0:
+1-081:put key-081 valQ081:0:
+1-082:put key-082 valR082:0:
+1-083:put key-083 valS083:0:
+1-084:put key-084 valT084:0:
+1-085:put key-085 valU085:0:
+1-086:put key-086 valV086:0:
+1-087:put key-087 valW087:0:
+1-088:put key-088 valX088:0:
+1-089:put key-089 valY089:0:
+1-090:put key-090 valZ090:0:
+1-091:put key-091 'val[091':0:
+1-092:put key-092 'val\092':0:
+1-093:put key-093 'val]093':0:
+1-094:put key-094 'val^094':0:
+1-095:put key-095 'val_095':0:
+1-096:put key-096 'val`096':0:
+1-097:put key-097 vala097:0:
+1-098:put key-098 valb098:0:
+1-099:put key-099 valc099:0:
+1-100:put key-100 vald100:0:
+1-101:put key-101 vale101:0:
+1-102:put key-102 valf102:0:
+1-103:put key-103 valg103:0:
+1-104:put key-104 valh104:0:
+1-105:put key-105 vali105:0:
+1-106:put key-106 valj106:0:
+1-107:put key-107 valk107:0:
+1-108:put key-108 vall108:0:
+1-109:put key-109 valm109:0:
+1-110:put key-110 valn110:0:
+1-111:put key-111 valo111:0:
+1-112:put key-112 valp112:0:
+1-113:put key-113 valq113:0:
+1-114:put key-114 valr114:0:
+1-115:put key-115 vals115:0:
+1-116:put key-116 valt116:0:
+1-117:put key-117 valu117:0:
+1-118:put key-118 valv118:0:
+1-119:put key-119 valw119:0:
+1-120:put key-120 valx120:0:
+1-121:put key-121 valy121:0:
+1-122:put key-122 valz122:0:
+1-123:put key-123 'val{123':0:
+1-124:put key-124 'val|124':0:
+1-125:put key-125 'val}125':0:
+1-126:put key-126 'val~126':0:
+1-127:put key-127 'val127':0:
+1-128:put key-128 val€128:0:
+1-129:put key-129 val129:0:
+1-130:put key-130 val‚130:0:
+1-131:put key-131 valƒ131:0:
+1-132:put key-132 val„132:0:
+1-133:put key-133 val…133:0:
+1-134:put key-134 val†134:0:
+1-135:put key-135 val‡135:0:
+1-136:put key-136 valˆ136:0:
+1-137:put key-137 val‰137:0:
+1-138:put key-138 valŠ138:0:
+1-139:put key-139 val‹139:0:
+1-140:put key-140 valŒ140:0:
+1-141:put key-141 val141:0:
+1-142:put key-142 val142:0:
+1-143:put key-143 val143:0:
+1-144:put key-144 val144:0:
+1-145:put key-145 val‘145:0:
+1-146:put key-146 val’146:0:
+1-147:put key-147 val“147:0:
+1-148:put key-148 val”148:0:
+1-149:put key-149 val•149:0:
+1-150:put key-150 val–150:0:
+1-151:put key-151 val—151:0:
+1-152:put key-152 val˜152:0:
+1-153:put key-153 val™153:0:
+1-154:put key-154 valš154:0:
+1-155:put key-155 val›155:0:
+1-156:put key-156 valœ156:0:
+1-157:put key-157 val157:0:
+1-158:put key-158 val158:0:
+1-159:put key-159 valŸ159:0:
+1-160:put key-160 val 160:0:
+1-161:put key-161 val¡161:0:
+1-162:put key-162 val¢162:0:
+1-163:put key-163 val£163:0:
+1-164:put key-164 val¤164:0:
+1-165:put key-165 val¥165:0:
+1-166:put key-166 val¦166:0:
+1-167:put key-167 val§167:0:
+1-168:put key-168 val¨168:0:
+1-169:put key-169 val©169:0:
+1-170:put key-170 valª170:0:
+1-171:put key-171 val«171:0:
+1-172:put key-172 val¬172:0:
+1-173:put key-173 val­173:0:
+1-174:put key-174 val®174:0:
+1-175:put key-175 val¯175:0:
+1-176:put key-176 val°176:0:
+1-177:put key-177 val±177:0:
+1-178:put key-178 val²178:0:
+1-179:put key-179 val³179:0:
+1-180:put key-180 val´180:0:
+1-181:put key-181 valµ181:0:
+1-182:put key-182 val¶182:0:
+1-183:put key-183 val·183:0:
+1-184:put key-184 val¸184:0:
+1-185:put key-185 val¹185:0:
+1-186:put key-186 valº186:0:
+1-187:put key-187 val»187:0:
+1-188:put key-188 val¼188:0:
+1-189:put key-189 val½189:0:
+1-190:put key-190 val¾190:0:
+1-191:put key-191 val¿191:0:
+1-192:put key-192 valÀ192:0:
+1-193:put key-193 valÁ193:0:
+1-194:put key-194 valÂ194:0:
+1-195:put key-195 valÃ195:0:
+1-196:put key-196 valÄ196:0:
+1-197:put key-197 valÅ197:0:
+1-198:put key-198 valÆ198:0:
+1-199:put key-199 valÇ199:0:
+1-200:put key-200 valÈ200:0:
+1-201:put key-201 valÉ201:0:
+1-202:put key-202 valÊ202:0:
+1-203:put key-203 valË203:0:
+1-204:put key-204 valÌ204:0:
+1-205:put key-205 valÍ205:0:
+1-206:put key-206 valÎ206:0:
+1-207:put key-207 valÏ207:0:
+1-208:put key-208 valĞ208:0:
+1-209:put key-209 valÑ209:0:
+1-210:put key-210 valÒ210:0:
+1-211:put key-211 valÓ211:0:
+1-212:put key-212 valÔ212:0:
+1-213:put key-213 valÕ213:0:
+1-214:put key-214 valÖ214:0:
+1-215:put key-215 val×215:0:
+1-216:put key-216 valØ216:0:
+1-217:put key-217 valÙ217:0:
+1-218:put key-218 valÚ218:0:
+1-219:put key-219 valÛ219:0:
+1-220:put key-220 valÜ220:0:
+1-221:put key-221 valİ221:0:
+1-222:put key-222 valŞ222:0:
+1-223:put key-223 valß223:0:
+1-224:put key-224 valà224:0:
+1-225:put key-225 valá225:0:
+1-226:put key-226 valâ226:0:
+1-227:put key-227 valã227:0:
+1-228:put key-228 valä228:0:
+1-229:put key-229 valå229:0:
+1-230:put key-230 valæ230:0:
+1-231:put key-231 valç231:0:
+1-232:put key-232 valè232:0:
+1-233:put key-233 valé233:0:
+1-234:put key-234 valê234:0:
+1-235:put key-235 valë235:0:
+1-236:put key-236 valì236:0:
+1-237:put key-237 valí237:0:
+1-238:put key-238 valî238:0:
+1-239:put key-239 valï239:0:
+1-240:put key-240 valğ240:0:
+1-241:put key-241 valñ241:0:
+1-242:put key-242 valò242:0:
+1-243:put key-243 való243:0:
+1-244:put key-244 valô244:0:
+1-245:put key-245 valõ245:0:
+1-246:put key-246 valö246:0:
+1-247:put key-247 val÷247:0:
+1-248:put key-248 valø248:0:
+1-249:put key-249 valù249:0:
+1-250:put key-250 valú250:0:
+1-251:put key-251 valû251:0:
+1-252:put key-252 valü252:0:
+1-253:put key-253 valı253:0:
+1-254:put key-254 valş254:0:
+1-255:put key-255 valÿ255:0:
+#:
+2-001:select key-001:1:val001:
+2-002:select key-002:1:val002:
+2-003:select key-003:1:val003:
+2-004:select key-004:1:val004:
+2-005:select key-005:1:val005:
+2-006:select key-006:1:val006:
+2-007:select key-007:1:val007:
+2-008:select key-008:1:val008:
+2-009:select key-009:1:val	009:
+2-011:select key-011:1:val011:
+2-012:select key-012:1:val012:
+2-014:select key-014:1:val014:
+2-015:select key-015:1:val015:
+2-016:select key-016:1:val016:
+2-017:select key-017:1:val017:
+2-018:select key-018:1:val018:
+2-019:select key-019:1:val019:
+2-020:select key-020:1:val020:
+2-021:select key-021:1:val021:
+2-022:select key-022:1:val022:
+2-023:select key-023:1:val023:
+2-024:select key-024:1:val024:
+2-025:select key-025:1:val025:
+2-026:select key-026:1:val026:
+2-027:select key-027:1:val027:
+2-028:select key-028:1:val028:
+2-029:select key-029:1:val029:
+2-030:select key-030:1:val030:
+2-031:select key-031:1:val031:
+2-032:select key-032:1:val 032:
+2-033:select key-033:1:val!033:
+2-034:select key-034:1:val"034:
+2-035:select key-035:1:val#035:
+2-036:select key-036:1:val$036:
+2-037:select key-037:1:val%037:
+2-038:select key-038:1:val&038:
+2-039:select key-039:1:val'039:
+2-040:select key-040:1:val(040:
+2-041:select key-041:1:val)041:
+2-042:select key-042:1:val*042:
+2-043:select key-043:1:val+043:
+2-044:select key-044:1:val,044:
+2-045:select key-045:1:val-045:
+2-046:select key-046:1:val.046:
+2-047:select key-047:1:val/047:
+2-048:select key-048:1:val0048:
+2-049:select key-049:1:val1049:
+2-050:select key-050:1:val2050:
+2-051:select key-051:1:val3051:
+2-052:select key-052:1:val4052:
+2-053:select key-053:1:val5053:
+2-054:select key-054:1:val6054:
+2-055:select key-055:1:val7055:
+2-056:select key-056:1:val8056:
+2-057:select key-057:1:val9057:
+2-058:select key-058:1:val%d058:
+2-059:select key-059:1:val;059:
+2-060:select key-060:1:val<060:
+2-061:select key-061:1:val=061:
+2-062:select key-062:1:val>062:
+2-063:select key-063:1:val?063:
+2-064:select key-064:1:val@064:
+2-065:select key-065:1:valA065:
+2-066:select key-066:1:valB066:
+2-067:select key-067:1:valC067:
+2-068:select key-068:1:valD068:
+2-069:select key-069:1:valE069:
+2-070:select key-070:1:valF070:
+2-071:select key-071:1:valG071:
+2-072:select key-072:1:valH072:
+2-073:select key-073:1:valI073:
+2-074:select key-074:1:valJ074:
+2-075:select key-075:1:valK075:
+2-076:select key-076:1:valL076:
+2-077:select key-077:1:valM077:
+2-078:select key-078:1:valN078:
+2-079:select key-079:1:valO079:
+2-080:select key-080:1:valP080:
+2-081:select key-081:1:valQ081:
+2-082:select key-082:1:valR082:
+2-083:select key-083:1:valS083:
+2-084:select key-084:1:valT084:
+2-085:select key-085:1:valU085:
+2-086:select key-086:1:valV086:
+2-087:select key-087:1:valW087:
+2-088:select key-088:1:valX088:
+2-089:select key-089:1:valY089:
+2-090:select key-090:1:valZ090:
+2-091:select key-091:1:val[091:
+2-092:select key-092:1:val\092:
+2-093:select key-093:1:val]093:
+2-094:select key-094:1:val^094:
+2-095:select key-095:1:val_095:
+2-096:select key-096:1:val`096:
+2-097:select key-097:1:vala097:
+2-098:select key-098:1:valb098:
+2-099:select key-099:1:valc099:
+2-100:select key-100:1:vald100:
+2-101:select key-101:1:vale101:
+2-102:select key-102:1:valf102:
+2-103:select key-103:1:valg103:
+2-104:select key-104:1:valh104:
+2-105:select key-105:1:vali105:
+2-106:select key-106:1:valj106:
+2-107:select key-107:1:valk107:
+2-108:select key-108:1:vall108:
+2-109:select key-109:1:valm109:
+2-110:select key-110:1:valn110:
+2-111:select key-111:1:valo111:
+2-112:select key-112:1:valp112:
+2-113:select key-113:1:valq113:
+2-114:select key-114:1:valr114:
+2-115:select key-115:1:vals115:
+2-116:select key-116:1:valt116:
+2-117:select key-117:1:valu117:
+2-118:select key-118:1:valv118:
+2-119:select key-119:1:valw119:
+2-120:select key-120:1:valx120:
+2-121:select key-121:1:valy121:
+2-122:select key-122:1:valz122:
+2-123:select key-123:1:val{123:
+2-124:select key-124:1:val|124:
+2-125:select key-125:1:val}125:
+2-126:select key-126:1:val~126:
+2-127:select key-127:1:val127:
+2-128:select key-128:1:val€128:
+2-129:select key-129:1:val129:
+2-130:select key-130:1:val‚130:
+2-131:select key-131:1:valƒ131:
+2-132:select key-132:1:val„132:
+2-133:select key-133:1:val…133:
+2-134:select key-134:1:val†134:
+2-135:select key-135:1:val‡135:
+2-136:select key-136:1:valˆ136:
+2-137:select key-137:1:val‰137:
+2-138:select key-138:1:valŠ138:
+2-139:select key-139:1:val‹139:
+2-140:select key-140:1:valŒ140:
+2-141:select key-141:1:val141:
+2-142:select key-142:1:val142:
+2-143:select key-143:1:val143:
+2-144:select key-144:1:val144:
+2-145:select key-145:1:val‘145:
+2-146:select key-146:1:val’146:
+2-147:select key-147:1:val“147:
+2-148:select key-148:1:val”148:
+2-149:select key-149:1:val•149:
+2-150:select key-150:1:val–150:
+2-151:select key-151:1:val—151:
+2-152:select key-152:1:val˜152:
+2-153:select key-153:1:val™153:
+2-154:select key-154:1:valš154:
+2-155:select key-155:1:val›155:
+2-156:select key-156:1:valœ156:
+2-157:select key-157:1:val157:
+2-158:select key-158:1:val158:
+2-159:select key-159:1:valŸ159:
+2-160:select key-160:1:val 160:
+2-161:select key-161:1:val¡161:
+2-162:select key-162:1:val¢162:
+2-163:select key-163:1:val£163:
+2-164:select key-164:1:val¤164:
+2-165:select key-165:1:val¥165:
+2-166:select key-166:1:val¦166:
+2-167:select key-167:1:val§167:
+2-168:select key-168:1:val¨168:
+2-169:select key-169:1:val©169:
+2-170:select key-170:1:valª170:
+2-171:select key-171:1:val«171:
+2-172:select key-172:1:val¬172:
+2-173:select key-173:1:val­173:
+2-174:select key-174:1:val®174:
+2-175:select key-175:1:val¯175:
+2-176:select key-176:1:val°176:
+2-177:select key-177:1:val±177:
+2-178:select key-178:1:val²178:
+2-179:select key-179:1:val³179:
+2-180:select key-180:1:val´180:
+2-181:select key-181:1:valµ181:
+2-182:select key-182:1:val¶182:
+2-183:select key-183:1:val·183:
+2-184:select key-184:1:val¸184:
+2-185:select key-185:1:val¹185:
+2-186:select key-186:1:valº186:
+2-187:select key-187:1:val»187:
+2-188:select key-188:1:val¼188:
+2-189:select key-189:1:val½189:
+2-190:select key-190:1:val¾190:
+2-191:select key-191:1:val¿191:
+2-192:select key-192:1:valÀ192:
+2-193:select key-193:1:valÁ193:
+2-194:select key-194:1:valÂ194:
+2-195:select key-195:1:valÃ195:
+2-196:select key-196:1:valÄ196:
+2-197:select key-197:1:valÅ197:
+2-198:select key-198:1:valÆ198:
+2-199:select key-199:1:valÇ199:
+2-200:select key-200:1:valÈ200:
+2-201:select key-201:1:valÉ201:
+2-202:select key-202:1:valÊ202:
+2-203:select key-203:1:valË203:
+2-204:select key-204:1:valÌ204:
+2-205:select key-205:1:valÍ205:
+2-206:select key-206:1:valÎ206:
+2-207:select key-207:1:valÏ207:
+2-208:select key-208:1:valĞ208:
+2-209:select key-209:1:valÑ209:
+2-210:select key-210:1:valÒ210:
+2-211:select key-211:1:valÓ211:
+2-212:select key-212:1:valÔ212:
+2-213:select key-213:1:valÕ213:
+2-214:select key-214:1:valÖ214:
+2-215:select key-215:1:val×215:
+2-216:select key-216:1:valØ216:
+2-217:select key-217:1:valÙ217:
+2-218:select key-218:1:valÚ218:
+2-219:select key-219:1:valÛ219:
+2-220:select key-220:1:valÜ220:
+2-221:select key-221:1:valİ221:
+2-222:select key-222:1:valŞ222:
+2-223:select key-223:1:valß223:
+2-224:select key-224:1:valà224:
+2-225:select key-225:1:valá225:
+2-226:select key-226:1:valâ226:
+2-227:select key-227:1:valã227:
+2-228:select key-228:1:valä228:
+2-229:select key-229:1:valå229:
+2-230:select key-230:1:valæ230:
+2-231:select key-231:1:valç231:
+2-232:select key-232:1:valè232:
+2-233:select key-233:1:valé233:
+2-234:select key-234:1:valê234:
+2-235:select key-235:1:valë235:
+2-236:select key-236:1:valì236:
+2-237:select key-237:1:valí237:
+2-238:select key-238:1:valî238:
+2-239:select key-239:1:valï239:
+2-240:select key-240:1:valğ240:
+2-241:select key-241:1:valñ241:
+2-242:select key-242:1:valò242:
+2-243:select key-243:1:való243:
+2-244:select key-244:1:valô244:
+2-245:select key-245:1:valõ245:
+2-246:select key-246:1:valö246:
+2-247:select key-247:1:val÷247:
+2-248:select key-248:1:valø248:
+2-249:select key-249:1:valù249:
+2-250:select key-250:1:valú250:
+2-251:select key-251:1:valû251:
+2-252:select key-252:1:valü252:
+2-253:select key-253:1:valı253:
+2-254:select key-254:1:valş254:
+2-255:select key-255:1:valÿ255:

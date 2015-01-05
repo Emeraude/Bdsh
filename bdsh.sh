@@ -40,8 +40,7 @@ write_value() {
 }
 
 delete_key() {
-    grep -vaP "^$1$separator" "$file_name" > /tmp/"$file_name";
-    cat /tmp/"$file_name" > "$file_name";
+    sed -i  "/^$1\x0/d" "$file_name";
     return $SUCCESS;
 }
 
@@ -62,7 +61,7 @@ key_exist() {
 get_true_arg() {
     if [ "$(echo $1 | cut -c 1)" == '$' ]
     then
-	check_key=$(echo -e ${2/'-'/'\x2D'} | cut -c 2-);
+	check_key=$(echo -e ${1/'-'/'\x2D'} | cut -c 2-);
 	if [ "$(grep -aP "^$check_key$separator" "$file_name" | cut -d '' -f1)" == "$check_key" ]
 	then
 	    true_arg=$(grep -aP "^$check_key$separator" "$file_name" | cut -d '' -f2);
@@ -77,7 +76,7 @@ get_true_arg() {
 get_key_value() {
     if [ "$(echo $1 | cut -c 1)" == '$' ]
     then
-	key=$(echo -e ${2/'-'/'\x2D'} | cut -c 2-);
+	key=$(echo -e ${1/'-'/'\x2D'} | cut -c 2-);
     else
 	key="$1";
     fi

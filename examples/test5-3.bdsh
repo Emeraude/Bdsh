@@ -1,6 +1,7 @@
 #: empty...
 0-0:flush:0:
 #:
+1-1:-f toto put -f titi:0:
 1-2:-f toto select -f titi:-1:Syntax error :
 #:
 2-1:select -k:0:
