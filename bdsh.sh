@@ -36,6 +36,13 @@ write_value() {
     fi
 }
 
+# $1 is the key
+# $2 is the new value
+edit_value() {
+    delete_value "$1";
+    write_value "$1" "$2";
+}
+
 get_true_arg() {
     if [ "$(echo $1 | cut -c 1)" == '$' ]
     then
@@ -93,6 +100,7 @@ db_put() {
 }
 
 db_del() {
+    # don't work
     if [ $# -eq 1 ]
     then
 	get_true_arg "$1";
@@ -149,7 +157,7 @@ db_flush() {
 }
 
 #TODO manage it in each case (-k after other options)
-#ârsing is awful, recode it
+#parsing is awful, recode it
 av=("$@");
 i=0;
 while [ $i -lt $# ]
