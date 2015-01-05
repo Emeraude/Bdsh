@@ -2,7 +2,7 @@
 .SH NAME
 bdsh.sh \- A shell script that emulate simples features of a database.
 .SH SYNOPSIS
-.B ./bdsh.sh\fR [\fB-k\fR] [\fB-f\fR \fIdb_file\fR] (\fBput\fR (\fIkey\fR | \fB$\fIkey\fR) (\fIvalue\fR | \fB$\fIkey\fR) | \fBdel\fR \fBput\fR (\fIkey\fR | \fB$\fIkey\fR) [\fIvalue\fR | \fB$\fIkey\fR] | \fBselect\fR [\fIexpr\fR | \fB$\fIkey\fR] | \fBflush\fR)
+.B ./bdsh.sh\fR [\fB-k\fR] [\fB-f\fR \fIdb_file\fR] (\fBput\fR (\fIkey\fR | \fB$\fIkey\fR) (\fIvalue\fR | \fB$\fIkey\fR) | \fBdel\fR (\fIkey\fR | \fB$\fIkey\fR) [\fIvalue\fR | \fB$\fIkey\fR] | \fBselect\fR [\fIexpr\fR | \fB$\fIkey\fR] | \fBflush\fR)
 .SH DESCRIPTION
 A shell script that emulate simples features of a database.
 .SH OPTIONS
@@ -11,10 +11,10 @@ A shell script that emulate simples features of a database.
 Change the database file. Default is \fBsh.db\fR.
 .TP
 \fB-k\fR
-Display the keys when you use \fBselect\fR.
+Display the keys when you are using \fBselect\fR.
 .SH COMMANDS
 .TP
-\fBdel\fR \fBput\fR (\fIkey\fR | \fB$\fIkey\fR) [\fIvalue\fR | \fB$\fIkey\fR]
+\fBdel\fR (\fIkey\fR | \fB$\fIkey\fR) [\fIvalue\fR | \fB$\fIkey\fR]
 Delete the specified key. If value is not specified, key still stay, but without value. If key doesn't exist or value is not the good one, nothing happen.
 .TP
 \fBflush\fR
