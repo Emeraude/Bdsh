@@ -9,23 +9,23 @@ true_arg='';
 file_name='sh.db';
 separator="\0";
 
-function syntax_error() {
+syntax_error() {
     #TODO : color (man style)
     echo -e 'Syntax error :\nUsage : ./bdsh.sh [-k] [-f file_name] (put key|$key value|$key) | (del key|$key [value|$key]) | (select [expr|$key]) | flush' 1>&2;
     exit $FAILURE;
 }
 
-function key_error() {
+key_error() {
     echo  "No such key : $1" 1>&2;
     exit $FAILURE;
 }
 
-function file_error() {
+file_error() {
     echo "No base found : $file_name" 1>&2;
     exit $FAILURE;
 }
 
-function write_value() {
+write_value() {
     if [ -f $file_name ]
     then
 	echo -n "$1" >> "$file_name";
@@ -36,7 +36,7 @@ function write_value() {
     fi
 }
 
-function get_true_arg() {
+get_true_arg() {
     if [ "$(echo $1 | cut -c 1)" == '$' ]
     then
 	key=$(echo $1 | cut -c 2-);
@@ -51,7 +51,7 @@ function get_true_arg() {
     fi
 }
 
-function get_key_value() {
+get_key_value() {
     if [ "$(echo $1 | cut -c 1)" == '$' ]
     then
 	key=$(echo $1 | cut -c 2-);
@@ -66,14 +66,14 @@ function get_key_value() {
     fi
 }
 
-function delete_key() {
+delete_key() {
     get_key_value "$1";
     grep -v "^$key$separator" "$file_name" | cut -d ':' -f1 > /tmp/"$file_name";
     mv /tmp/"$file_name" "$file_name";
 }
 
 # TODO
-function db_put() {
+db_put() {
     # don't work
     if [ $# -lt 2 ]
     then
@@ -92,7 +92,7 @@ function db_put() {
 }
 
 # TODO
-function db_del() {
+db_del() {
     if [ $# -eq 1 ]
     then
 	delete_key "$1";
@@ -110,7 +110,7 @@ function db_del() {
     fi
 }
 
-function db_select() {
+db_select() {
     if [ $# -ne 0 ]
     then
 	if [ "$(echo $1 | cut -c 1)" == '$' ]
@@ -140,7 +140,7 @@ function db_select() {
     exit $SUCCESS;
 }
 
-function db_flush() {
+db_flush() {
     echo -n > "$file_name";
     exit $SUCCESS;
 }
