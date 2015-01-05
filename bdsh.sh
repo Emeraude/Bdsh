@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 # todo : change shebang
 
 SUCCESS=0;
@@ -10,17 +10,20 @@ file_name='sh.db';
 separator="\0";
 
 function syntax_error() {
-    echo 'Syntax error :\nUsage : ./bdsh.sh [-k] [-f file_name] (put key|$key value|$key) | (del key|$key [value|$key]) | (select [expr|$key]) | flush' 1>&2;
+    #TODO : color (man style)
+    echo -e 'Syntax error :\nUsage : ./bdsh.sh [-k] [-f file_name] (put key|$key value|$key) | (del key|$key [value|$key]) | (select [expr|$key]) | flush' 1>&2;
     exit $FAILURE;
 }
 
+syntax_error;
+
 function key_error() {
-    echo  "No such key : $1";
+    echo  "No such key : $1" 1>&2;
     exit $FAILURE;
 }
 
 function file_error() {
-    echo "No base found : $file_name";
+    echo "No base found : $file_name" 1>&2;
     exit $FAILURE;
 }
 
@@ -73,6 +76,7 @@ function delete_key() {
 
 # TODO
 function db_put() {
+    # don't work
     if [ $# -lt 2 ]
     then
 	syntax_error;
