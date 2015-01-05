@@ -78,7 +78,6 @@ get_key_value() {
     fi
 }
 
-# TODO
 db_put() {
     # don't work
     if [ $# -lt 2 ]

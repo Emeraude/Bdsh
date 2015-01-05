@@ -1,0 +1,42 @@
+.TH BDSH "1" "January 2015" "v1.0" "BDSH"
+.SH NAME
+bdsh.sh \- A shell script that emulate simples features of a database.
+.SH SYNOPSIS
+.B ./bdsh.sh\fR [\fB-k\fR] [\fB-f\fR \fIdb_file\fR] (\fBput\fR (\fIkey\fR | \fB$\fIkey\fR) (\fIvalue\fR | \fB$\fIkey\fR) | \fBdel\fR \fBput\fR (\fIkey\fR | \fB$\fIkey\fR) [\fIvalue\fR | \fB$\fIkey\fR] | \fBselect\fR [\fIexpr\fR | \fB$\fIkey\fR] | \fBflush\fR)
+.SH DESCRIPTION
+A shell script that emulate simples features of a database.
+.SH OPTIONS
+.TP
+\fB-f\fR \fIdb_file\fR
+Change the database file. Default is \fBsh.db\fR.
+.TP
+\fB-k\fR
+Display the keys when you use \fBselect\fR.
+.SH COMMANDS
+.TP
+\fBdel\fR \fBput\fR (\fIkey\fR | \fB$\fIkey\fR) [\fIvalue\fR | \fB$\fIkey\fR]
+Delete the specified key. If value is not specified, key still stay, but without value. If key doesn't exist or value is not the good one, nothing happen.
+.TP
+\fBflush\fR
+Empty the database. The file is not deleted
+.TP
+\fBput\fR (\fIkey\fR | \fB$\fIkey\fR) (\fIvalue\fR | \fB$\fIkey\fR)
+Add a new key containing the specified value. If key already exists, it is erased.
+.TP
+\fBselect\fR [\fIexpr\fR | \fB$\fIkey\fR]
+Display all the values that the keys match the expression, or every value if there is no parameter. The expression must be a regexp compatible with the \fBgrep\fR commande. If first character is a \fB$\fR, then the exact key will be searched, and only its value will be displayed.
+.SH EXIT STATUS
+.TP
+\fB0\fR
+Sucessful program execution.
+.TP
+\fB1\fR
+An error occured, and an error message is displayed on stderr.
+.SH BUGS
+.PP
+No known bug.
+.br
+Report bdsh bugs to broggi_t@epitech.eu
+.SH AUTHOR
+.PP
+Written by broggi_t.
