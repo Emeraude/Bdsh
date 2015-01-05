@@ -15,8 +15,6 @@ function syntax_error() {
     exit $FAILURE;
 }
 
-syntax_error;
-
 function key_error() {
     echo  "No such key : $1" 1>&2;
     exit $FAILURE;
