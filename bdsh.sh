@@ -36,10 +36,15 @@ write_value() {
     fi
 }
 
+delete_key() {
+    grep -vaP "^$key$separator" "$file_name" > /tmp/"$file_name";
+    mv /tmp/"$file_name" "$file_name";
+}
+
 # $1 is the key
 # $2 is the new value
 edit_value() {
-    delete_value "$1";
+    delete_key "$1";
     write_value "$1" "$2";
 }
 
@@ -47,9 +52,9 @@ get_true_arg() {
     if [ "$(echo $1 | cut -c 1)" == '$' ]
     then
 	key=$(echo $1 | cut -c 2-);
-	if [ "$(grep -a "^$key$separator" "$file_name" | cut -d '' -f1)" == "$key" ]
+	if [ "$(grep -aP "^$key$separator" "$file_name" | cut -d '' -f1)" == "$key" ]
 	then
-	    true_arg=$(cat "file_name" | grep -a "^$key" | cut -d '' -f2);
+	    true_arg=$(grep -aP "^$key$separator" "$file_name" | cut -d '' -f2);
 	else
 	    key_error "$key";
 	fi
@@ -63,20 +68,14 @@ get_key_value() {
     then
 	key=$(echo $1 | cut -c 2-);
     else
-	key=$1;
+	key="$1";
     fi
     if [ "$(grep -a "^$key" "$file_name" | cut -d '' -f1)" == "$key" ]
     then
 	current_value_for_key=$(grep -a "^$key" "$file_name" | cut -d '' -f2);
     else
-	key_error $key;
+	key_error "$key";
     fi
-}
-
-delete_key() {
-    get_key_value "$1";
-    grep -vaP "^$key$separator" "$file_name" > /tmp/"$file_name";
-    mv /tmp/"$file_name" "$file_name";
 }
 
 # TODO
@@ -86,14 +85,16 @@ db_put() {
     then
 	syntax_error;
     else
-	if [ "$(echo $1 | cut -c 1)" == '$' ]
+	get_true_arg "$1";
+	key="$true_arg";
+	get_true_arg "$2";
+	val="$true_arg";
+	if [ $(grep -aP "^$key$separator" "$file_name" | wc -l) -ne 0 ]
 	then
-	    get_key_value "$1";
-	    # existing key
-	    echo "existing key";
-	    # replace it
+	    echo -n;
+	    edit_value "$key" "$val";
 	else
-	    write_value "$1" "$2";
+	    write_value "$key" "$val";
 	fi
     fi
     exit $SUCCESS;
