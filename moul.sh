@@ -178,7 +178,7 @@ launch_test()
               if [ "$choice" == "x" -o "$choice" == "X" ]
               then
                 rm $tmp
-                exit 0
+                exit 1
               fi
               if [ "$choice" == "d" -o "$choice" == "D" ]
               then
@@ -206,7 +206,7 @@ launch_test()
             if [ "$choice" == "x" -o "$choice" == "X" ]
             then
               rm $tmp
-              exit 0
+              exit 1
             fi
             if [ "$choice" == "d" -o "$choice" == "D" ]
             then
@@ -233,7 +233,7 @@ launch_test()
           if [ "$choice" == "x" -o "$choice" == "X" ]
           then
             rm $tmp
-            exit 0
+            exit 1
           fi
           if [ "$choice" == "d" -o "$choice" == "D" ]
           then
@@ -269,7 +269,7 @@ launch_test()
               echo "Your Result :"
               cat $tmp
               echo "Diff :"
-              cat $tmp.diff              
+              cat $tmp.diff
             fi
             if [ "$choice" == "c" -o "$choice" == "C" ]
             then
@@ -284,7 +284,7 @@ launch_test()
       else
         rm $tmp
         echo "YOUR RESULT : Ok"
-      fi 
+      fi
     fi
   done
 }
