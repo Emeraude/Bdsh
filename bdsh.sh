@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 # todo : change shebang
 
 SUCCESS=0;
@@ -123,8 +123,8 @@ function db_select() {
 	    echo $current_value_for_key;
 	else
 	    lines=$(cut -d '' -f1 < "$file_name" | grep "$1");
-	    #DANGEROUS : REALLY WORK WITH SPACES ?
-	    #try with a simple grep
+	    oldIFS=$IFS;
+	    IFS=$(echo);
 	    for line in ${lines[@]}
 	    do
 		get_key_value "$line";
@@ -134,6 +134,7 @@ function db_select() {
 		fi
 		echo $current_value_for_key;
 	    done
+	    IFS=$oldIFS;
 	fi
     else
 	if [ $print_key -eq 1 ]
