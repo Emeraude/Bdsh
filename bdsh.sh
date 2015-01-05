@@ -27,16 +27,16 @@ file_error() {
 write_value() {
     if [ -f $file_name ]
     then
-	echo -n "$1" >> "$file_name";
+	echo -en ${1/'-'/'\x2D'} >> "$file_name";
 	echo -en "$separator" >> "$file_name";
-	echo "$2" >> "$file_name";
+	echo -e ${2/'-'/'\x2D'} >> "$file_name";
     else
 	file_error;
     fi
 }
 
 delete_key() {
-    grep -vaP "^$key$separator" "$file_name" > /tmp/"$file_name";
+    grep -vaP "^$1$separator" "$file_name" > /tmp/"$file_name";
     cat /tmp/"$file_name" > "$file_name";
 }
 
@@ -48,10 +48,10 @@ edit_value() {
 get_true_arg() {
     if [ "$(echo $1 | cut -c 1)" == '$' ]
     then
-	key=$(echo $1 | cut -c 2-);
-	if [ "$(grep -aP "^$key$separator" "$file_name" | cut -d '' -f1)" == "$key" ]
+	check_key=$(echo $1 | cut -c 2-);
+	if [ "$(grep -aP "^$check_key$separator" "$file_name" | cut -d '' -f1)" == "$check_key" ]
 	then
-	    true_arg=$(grep -aP "^$key$separator" "$file_name" | cut -d '' -f2);
+	    true_arg=$(grep -aP "^$check_key$separator" "$file_name" | cut -d '' -f2);
 	else
 	    key_error "$key";
 	fi
@@ -85,9 +85,9 @@ db_put() {
 	key="$true_arg";
 	get_true_arg "$2";
 	val="$true_arg";
+	grep -aP "^$key$separator" "$file_name"
 	if [ $(grep -aP "^$key$separator" "$file_name" | wc -l) -ne 0 ]
 	then
-	    echo -n;
 	    edit_value "$key" "$val";
 	else
 	    write_value "$key" "$val";
@@ -100,7 +100,6 @@ db_del() {
     if [ $# -eq 1 ]
     then
 	get_true_arg "$1";
-	echo $true_arg;
 	delete_key "$true_arg";
 	write_value "$1" '';
     elif [ $# -eq 2 ]
@@ -131,9 +130,9 @@ db_select() {
 	else
 	    if [ $print_key -eq 1 ]
 	    then
-		grep -aP "$1" "$file_name" | tr "$separator" '=';
+		grep -a "^[*]*$1[*]*" "$file_name" | tr "$separator" '=';
 	    else
-		grep -aP "$1" "$file_name" | cut -d '' -f2;
+		grep -a "^[*]*$1[*]*" "$file_name" | cut -d '' -f2;
 	    fi
 	fi
     elif [ $# -eq 0 ]

@@ -1,0 +1,10 @@
+#: empty...
+0-0:flush:0:
+#:
+1-2:-f toto select -f titi:-1:Syntax error :
+#:
+2-1:select -k:0:
+2-2:put key2-2 val2-2:0:
+2-3:select -k:0:
+2-4:-k select '':1:key2-2=val2-2:
+#:
