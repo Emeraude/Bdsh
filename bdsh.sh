@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 # todo : change shebang
 
 SUCCESS=0;
@@ -28,9 +28,9 @@ function file_error() {
 function write_value() {
     if [ -f $file_name ]
     then
-	echo -n $1 >> $file_name;
-	echo -en $separator >> $file_name;
-	echo $2 >> $file_name;
+	echo -n "$1" >> "$file_name";
+	echo -en "$separator" >> "$file_name";
+	echo "$2" >> "$file_name";
     else
 	file_error;
     fi
@@ -42,9 +42,9 @@ function get_true_arg() {
 	key=$(echo $1 | cut -c 2-);
 	if [ "$(grep -a "^$key$separator" "$file_name" | cut -d '' -f1)" == "$key" ]
 	then
-	    true_arg=$(cat "file_name" | grep -a "^key" | cut -d '' -f2);
+	    true_arg=$(cat "file_name" | grep -a "^$key" | cut -d '' -f2);
 	else
-	    key_error $key;
+	    key_error "$key";
 	fi
     else
 	true_arg="$1";
@@ -60,7 +60,7 @@ function get_key_value() {
     fi
     if [ "$(grep -a "^$key" "$file_name" | cut -d '' -f1)" == "$key" ]
     then
-	current_value_for_key=$(cat "$file_name" | grep -a "^$key" | cut -d '' -f2);
+	current_value_for_key=$(grep -a "^$key" "$file_name" | cut -d '' -f2);
     else
 	key_error $key;
     fi
@@ -96,7 +96,7 @@ function db_del() {
     if [ $# -eq 1 ]
     then
 	delete_key "$1";
-	echo "$1"$separator >> "$file_name";
+	write_value "$1" '';
     elif [ $# -eq 2 ]
     then
 	if [ "$(echo $1 | cut -c 1)" == '$' ]
@@ -122,24 +122,17 @@ function db_select() {
 	    fi
 	    echo $current_value_for_key;
 	else
-	    lines=$(cut -d '' -f1 < "$file_name" | grep "$1");
-	    oldIFS=$IFS;
-	    IFS=$(echo);
-	    for line in ${lines[@]}
-	    do
-		get_key_value "$line";
-		if [ $print_key -eq 1 ]
-		then
-		    echo -n $key'=';
-		fi
-		echo $current_value_for_key;
-	    done
-	    IFS=$oldIFS;
+	    if [ $print_key -eq 1 ]
+	    then
+		grep -aP "$1" "$file_name" | tr "$separator" '=';
+	    else
+		grep -aP "$1" "$file_name" | cut -d '' -f2;
+	    fi
 	fi
     else
 	if [ $print_key -eq 1 ]
 	then
-	    tr $separator '=' < "$file_name";
+	    tr "$separator" '=' < "$file_name";
 	else
 	    cut -d '' -f2 < "$file_name";
 	fi
