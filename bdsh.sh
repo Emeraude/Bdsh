@@ -1,5 +1,4 @@
 #!/bin/sh
-# todo : change shebang
 
 SUCCESS=0;
 FAILURE=1;
@@ -38,11 +37,9 @@ write_value() {
 
 delete_key() {
     grep -vaP "^$key$separator" "$file_name" > /tmp/"$file_name";
-    mv /tmp/"$file_name" "$file_name";
+    cat /tmp/"$file_name" > "$file_name";
 }
 
-# $1 is the key
-# $2 is the new value
 edit_value() {
     delete_key "$1";
     write_value "$1" "$2";
@@ -79,11 +76,11 @@ get_key_value() {
 }
 
 db_put() {
-    # don't work
-    if [ $# -lt 2 ]
+    if [ $# -ne 2 ]
     then
 	syntax_error;
     else
+	echo -n >> "$file_name";
 	get_true_arg "$1";
 	key="$true_arg";
 	get_true_arg "$2";
@@ -100,7 +97,6 @@ db_put() {
 }
 
 db_del() {
-    # don't work
     if [ $# -eq 1 ]
     then
 	get_true_arg "$1";
@@ -122,7 +118,7 @@ db_del() {
 }
 
 db_select() {
-    if [ $# -ne 0 ]
+    if [ $# -eq 1 ]
     then
 	if [ "$(echo $1 | cut -c 1)" == '$' ]
 	then
@@ -131,7 +127,7 @@ db_select() {
 	    then
 		echo -n $key'=';
 	    fi
-	    echo $current_value_for_key;
+	    echo "$current_value_for_key";
 	else
 	    if [ $print_key -eq 1 ]
 	    then
@@ -140,13 +136,16 @@ db_select() {
 		grep -aP "$1" "$file_name" | cut -d '' -f2;
 	    fi
 	fi
-    else
+    elif [ $# -eq 0 ]
+    then
 	if [ $print_key -eq 1 ]
 	then
 	    tr "$separator" '=' < "$file_name";
 	else
 	    cut -d '' -f2 < "$file_name";
 	fi
+    else
+	syntax_error;
     fi
     exit $SUCCESS;
 }
@@ -156,36 +155,29 @@ db_flush() {
     exit $SUCCESS;
 }
 
-#TODO manage it in each case (-k after other options)
-#parsing is awful, recode it
-av=("$@");
-i=0;
-while [ $i -lt $# ]
+while getopts "kf:" option "$@"
 do
-    a="${av[$i]}";
-    if [ "$a" == '-k' ] || [ "$a" == '--key' ]
-    then
-	print_key=1;
-    elif [ "$a" == '-f' ] || [ "$a" == '--file' ]
-    then
-	if [ `expr $i + 2` -gt $# ]
-	then
+    case $option in
+	k)
+	    print_key=1;
+	    ;;
+	f)
+	    file_name="$OPTARG";
+	    ;;
+	\?)
 	    syntax_error;
-	fi
-	file_name="${av[`expr $i + 1`]}";
-	i=`expr $i + 1`;
-    elif [ "$a" == 'put' ]
-    then
-	db_put "${av[`expr $i + 1`]}" "${av[`expr $i + 2`]}";
-    elif [ "$a" == 'select' ]
-    then
-	db_select "${av[`expr $i + 1`]}" "${av[`expr $i + 2`]}";
-    elif [ "$a" == 'del' ]
-    then
-	db_del "${av[`expr $i + 1`]}" "${av[`expr $i + 2`]}";
-    elif [ "$a" == 'flush' ]
-    then
-	db_flush;
-    fi
-    i=`expr $i + 1`;
+	    ;;
+    esac
 done
+
+shift $((OPTIND-1));
+
+if [ "$1" == 'put' ] || [ "$1" == 'del' ] || [ "$1" == 'select' ] || [ "$1" == 'flush' ]
+then
+    #TODO : make it cleaner
+    cmd="db_$1"
+    shift 1;
+    "$cmd" "$@";
+else
+    syntax_error;
+fi
