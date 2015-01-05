@@ -24,8 +24,12 @@ file_error() {
     exit $FAILURE;
 }
 
+check_file() {
+    [ -f "$file_name" ] || file_error;
+}
+
 write_value() {
-    if [ -f $file_name ]
+    if [ -f "$file_name" ]
     then
 	echo -en ${1/'-'/'\x2D'} >> "$file_name";
 	echo -en "$separator" >> "$file_name";
@@ -38,11 +42,21 @@ write_value() {
 delete_key() {
     grep -vaP "^$1$separator" "$file_name" > /tmp/"$file_name";
     cat /tmp/"$file_name" > "$file_name";
+    return $SUCCESS;
 }
 
 edit_value() {
     delete_key "$1";
     write_value "$1" "$2";
+}
+
+key_exist() {
+    if [ "$(grep -aP "^$1$separator" "$file_name" | wc -l)" -eq 0 ]
+    then
+	return $FAILURE;
+    else
+	return $SUCCESS;
+    fi
 }
 
 get_true_arg() {
@@ -53,7 +67,7 @@ get_true_arg() {
 	then
 	    true_arg=$(grep -aP "^$check_key$separator" "$file_name" | cut -d '' -f2);
 	else
-	    key_error "$key";
+	    key_error "$check_key";
 	fi
     else
 	true_arg="$1";
@@ -85,7 +99,6 @@ db_put() {
 	key="$true_arg";
 	get_true_arg "$2";
 	val="$true_arg";
-	grep -aP "^$key$separator" "$file_name"
 	if [ $(grep -aP "^$key$separator" "$file_name" | wc -l) -ne 0 ]
 	then
 	    edit_value "$key" "$val";
@@ -97,11 +110,11 @@ db_put() {
 }
 
 db_del() {
+    check_file;
     if [ $# -eq 1 ]
     then
 	get_true_arg "$1";
-	delete_key "$true_arg";
-	write_value "$1" '';
+	key_exist "$1" && delete_key "$true_arg" && write_value "$1" '';
     elif [ $# -eq 2 ]
     then
 	get_true_arg "$1";
@@ -119,6 +132,7 @@ db_del() {
 db_select() {
     if [ $# -eq 1 ]
     then
+	check_file;
 	if [ "$(echo $1 | cut -c 1)" == '$' ]
 	then
 	    get_key_value "$1";
@@ -137,6 +151,7 @@ db_select() {
 	fi
     elif [ $# -eq 0 ]
     then
+	check_file;
 	if [ $print_key -eq 1 ]
 	then
 	    tr "$separator" '=' < "$file_name";
