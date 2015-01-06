@@ -3,7 +3,6 @@
 SUCCESS=0;
 FAILURE=1;
 print_key=0;
-current_value_for_key='undefined';
 true_arg='';
 file_name='sh.db';
 separator="\0";
@@ -60,7 +59,11 @@ edit_value() {
 }
 
 check_if_exact_key_exist() {
-    cut -d '' -f1 < "$file_name" | grep -nawF -- "$1" > /dev/null || return $FAILURE && return $SUCCESS;
+    cut -d '' -f1 < "$file_name" | grep -nwF -- "$1" > /dev/null || return $FAILURE && return $SUCCESS;
+}
+
+get_line_numbers_by_key() {
+    cut -d '' -f1 < "$file_name" | grep -n -- "$1" | cut -d ':' -f1;
 }
 
 get_line_number_by_exact_line() {
@@ -68,7 +71,15 @@ get_line_number_by_exact_line() {
 }
 
 get_line_number_by_exact_key() {
-    cut -d '' -f1 < "$file_name" | grep -nawF -- "$1" | cut -d ':' -f1;
+    cut -d '' -f1 < "$file_name" | grep -nwF -- "$1" | cut -d ':' -f1;
+}
+
+get_line_by_line_number() {
+    head "$file_name" -n "$1" | tail -n 1;
+}
+
+get_value_by_line_number() {
+    get_line_by_line_number "$1" | cut -d '' -f2;
 }
 
 get_value_by_exact_key() {
@@ -132,24 +143,16 @@ db_del() {
 db_select() {
     if [ $# -eq 1 ]
     then
-	if [ "$(echo $1 | cut -c 1)" == '$' ]
-	then
-	    get_value_by_exact_key "$1";
+	get_true_arg "$1";
+	for line in $(get_line_numbers_by_key "$true_arg")
+	do
 	    if [ $print_key -eq 1 ]
 	    then
-		echo -n $key'=';
-	    fi
-	    echo "$current_value_for_key";
-	else
-	    if [ $print_key -eq 1 ]
-	    then
-		# make a loop
-		sed -n "/^.*$1.*\x0/p" "$file_name" | tr "$separator" '=';
+		get_line_by_line_number "$line" | tr "$separator" '=';
 	    else
-		# make a loop
-		sed -n "/^.*$1.*\x0/p" "$file_name" | cut -d '' -f2;
+		get_value_by_line_number "$line";
 	    fi
-	fi
+	done
     elif [ $# -eq 0 ]
     then
 	check_file_readable;

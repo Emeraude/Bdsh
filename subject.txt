@@ -9,7 +9,7 @@ Forum : B3 - Shell Script : A lire TRES régulièrement ! (plusieurs fois par jour
 
 ------------------------------------------------------------
 
-Attention particulière sur le forum : 
+Attention particulière sur le forum :
   * Seul les threads créé cette année seront lu / répondu / officiels !
   * Ne répondez pas à un thread de l'an dernier: hormis poluer le forum, ça ne sert à rien
   * Les réponses apportées les années passées pourraient vous induire en erreur (évolution
@@ -30,11 +30,12 @@ Synopsis
  "sh.db" dont on pourra éventuellement passer le nom en paramètre grâce à
  l'option `-f'.
 
-   Les paramètres du script seront les suivants: 
+   Les paramètres du script seront les suivants:
 
-    - put <clef> <valeur> - Ajoute une clef <clef> contenant la valeur 
+    - put <clef> <valeur> - Ajoute une clef <clef> contenant la valeur
     <valeur>. Si la clef existe déjà, la valeur est écrasée.
     Rien n'est affiché.
+    Si la base de données n'existe pas, la commande "put" crée la DB.
 
     - del <clef> [<valeur>] - Efface la clef <clef>. Si la valeur est omise,
     la clef reste présente sans contenu. Si la clef n'existe pas ou si la
@@ -46,7 +47,7 @@ Synopsis
     C'est le matching de la commande grep qui est utilisé. On utilisera
     pour l'affichage l'ordre du fichier, qui sera l'ordre chronologique
     d'insertion ou de modification.
-	
+
 	flush - Vide toutes les entrées présentes dans la base. Le fichier lui
     même n'est pas supprimé.
 
@@ -76,7 +77,7 @@ Synopsis
                 val1
                 key1
                 ./bdsh.sh select '$key2'
-                val1
+                key1
                 ./bdsh.sh select '[2-9]$'
                 val1
 
@@ -130,7 +131,7 @@ Synopsis
 
 	Téléchargez la moulinette de test et des jeux de test. Pensez à mettre les
 	droits en exécution ! La moulinette est elle aussi un script shell ;)
-	
+
     La moulinette prend en paramètre 2 arguments : le nom de votre programme
 	(normalement "bdsh.sh") et un fichier de test. Votre BDSH et le fichier de
 	test doivent obligatoirement se trouver dans le même répertoire que la
@@ -178,27 +179,27 @@ Synopsis
     YOUR RESULT : Le résultat de votre bdsh :
 	  => Ok : Votre bdsh s'est comporté comme attendu - Le test à réussi
 	  => Error : Votre bdsh ne s'est pas comporté comme prévu. Le test à échoué
-	
+
 	Si le résultat attendu n'est pas bon, la moulinette vous proposera
 	d'afficher le résultat de votre bdsh ainsi qu'un diff entre les résultats
-	
+
 *** Les batteries de test ***
 
 	Un premier jeu de test est disponible au même endroit que la moulinette.
 	Tout au long du rush, de nouveaux jeux de test, de plus en plus compliqués
 	seront mis à disposition au même endroit.
-	
+
 *** Le rendu ***
-	
+
 	Vous devez utiliser le système de rendu blih du bocal. (Voir documentation
 	sur l'intra-bocal)
 	Une documentation plus détaillée est disponible sur l'intra Epitech :
 	https://intra.epitech.eu/file/public/rendu/comment-rendre.pdf
 	Lisez bien cette documentation, et surtout, la partie FAQ concernant
 	les droits à mettre pour que le ramassage puisse se faire !
-	
+
 *** Questions / Réponses ***
 
     Utilisez le forum de l'intra : Forum : B3 - Shell Script
-	
+
 *** End ***
