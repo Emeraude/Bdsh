@@ -41,14 +41,18 @@ check_file_create() {
 
 write_value() {
     check_file_writable;
-    echo -en ${1/'-'/'\x2D'} >> "$file_name";
+    oldIFS=$IFS;
+    IFS='';
+    key="$(sed -e s/\\\\0/\\\\\\\\0/g <<< $1)";
+    val="$(sed -e s/\\\\0/\\\\\\\\0/g <<< $2)";
+    echo -en ${key/'-'/'\x2D'} >> "$file_name";
     echo -en "$separator" >> "$file_name";
-    echo -e ${2/'-'/'\x2D'} >> "$file_name";
+    echo -e ${val/'-'/'\x2D'} >> "$file_name";
+    IFS=$oldIFS;
 }
 
 delete_key() {
     check_file_writable;
-    #CAN WE DO IT BETTER ?
     sed -i  "/^$1\x0/d" "$file_name";
     return $SUCCESS;
 }
@@ -67,7 +71,7 @@ get_line_numbers_by_key() {
 }
 
 get_line_number_by_exact_line() {
-    grep -nawF -- "$1$2" "$file_name" | cut -d ':' -f1;
+    cat -v "$file_name" | grep -nawF -- "$1^@$2" | cut -d ':' -f1;
 }
 
 get_line_number_by_exact_key() {
@@ -89,6 +93,7 @@ get_value_by_exact_key() {
 get_true_arg() {
     if [ "${1:0:1}" == '$' ]
     then
+	check_file_readable;
 	check_key="${1:1:${#1}}";
 	if check_if_exact_key_exist $check_key
 	then
@@ -132,8 +137,11 @@ db_del() {
 	key="$true_arg";
 	get_true_arg "$2";
 	val="$true_arg";
-	line=$(get_line_number_by_exact_line) || break;
-	sed -i "$line"d "$file_name";
+	# break if error ?
+	for line in $(get_line_number_by_exact_line "$key" "$val")
+	do
+	    sed -i "$line"d "$file_name";
+	done
     else
 	syntax_error;
     fi

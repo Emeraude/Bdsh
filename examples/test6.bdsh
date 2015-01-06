@@ -121,7 +121,7 @@
 4-6:put '$key4-04' val4-06:0:
 4-7:select val4-03:1:val4-06:
 4-8:put '$val4-03' '$key4-04':0:
-4-9:-k select '$key4-04':1:key4-04=val4-03:
+4-9:-k select '$key4-04':1:val4-03=val4-06:
 4-10:-k select val4-06:1:val4-06=val4-03:
 4-20:put key4-20 '.*\^':0:
 4-21:select '$key4-20' -k:-1:Syntax error :
