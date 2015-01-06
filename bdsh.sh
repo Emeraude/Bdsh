@@ -52,7 +52,7 @@ write_value() {
 
 delete_key() {
     check_file_writable;
-    sed -i  "/^$1\x0/d" "$file_name";
+    sed -i -- "/^$1\x0/d" "$file_name";
     return $SUCCESS;
 }
 
@@ -70,7 +70,7 @@ get_line_numbers_by_key() {
 }
 
 get_line_number_by_exact_line() {
-    cat -v "$file_name" | grep -nawF -- "$1^@$2" | cut -d ':' -f1;
+    cat -v -- "$file_name" | grep -nawF -- "$1^@$2" | cut -d ':' -f1;
 }
 
 get_line_number_by_exact_key() {
@@ -78,7 +78,7 @@ get_line_number_by_exact_key() {
 }
 
 get_line_by_line_number() {
-    head "$file_name" -n "$1" | tail -n 1;
+    head -n "$1" -- "$file_name" | tail -n 1;
 }
 
 get_value_by_line_number() {
@@ -86,7 +86,7 @@ get_value_by_line_number() {
 }
 
 get_value_by_exact_key() {
-    check_if_exact_key_exist "$1" && head "$file_name" -n "$(get_line_number_by_exact_key "$1")" | tail -n 1 | cut -d '' -f2 || return $FAILURE && return $SUCESS;
+    check_if_exact_key_exist "$1" && head -n "$(get_line_number_by_exact_key "$1")" -- "$file_name" | tail -n 1 | cut -d '' -f2 || return $FAILURE && return $SUCESS;
 }
 
 get_true_arg() {
@@ -139,7 +139,7 @@ db_del() {
 	# break if error ?
 	for line in $(get_line_number_by_exact_line "$key" "$val")
 	do
-	    sed -i "$line"d "$file_name";
+	    sed -i -- "$line"d "$file_name";
 	done
     else
 	syntax_error;
