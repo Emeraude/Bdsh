@@ -262,7 +262,7 @@ launch_test()
             if [ "$choice" == "x" -o "$choice" == "X" ]
             then
               rm $tmp $tmp.ok $tmp.diff
-              exit 0
+              exit 1
             fi
             if [ "$choice" == "d" -o "$choice" == "D" ]
             then
