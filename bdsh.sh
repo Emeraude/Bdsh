@@ -8,8 +8,7 @@ file_name='sh.db';
 separator="\0";
 
 syntax_error() {
-    #TODO : color (man style) (only after "Syntax error :")
-    echo -e 'Syntax error :\nUsage : ./bdsh.sh [-k] [-f file_name] (put key|$key value|$key) | (del key|$key [value|$key]) | (select [expr|$key]) | flush' 1>&2;
+    echo -e "Syntax error :\nUsage : ${0##*/} [-k] [-f file_name] (put key|$key value|$key) | (del key|$key [value|$key]) | (select [expr|$key]) | flush" 1>&2;
     exit $FAILURE;
 }
 
@@ -200,7 +199,6 @@ shift $((OPTIND-1));
 
 if [ "$1" == 'put' ] || [ "$1" == 'del' ] || [ "$1" == 'select' ] || [ "$1" == 'flush' ]
 then
-    #TODO : make it cleaner
     cmd="db_$1"
     shift 1;
     "$cmd" "$@";
