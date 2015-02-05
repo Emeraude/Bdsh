@@ -10,5 +10,5 @@ A simple git-hook pre-commit is available ; it aborts the commit if one of the t
 
 broggi_t
 
-Mark : 18/20
+Mark : 18/20  
 Grade : A

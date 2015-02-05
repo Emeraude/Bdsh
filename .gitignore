@@ -2,3 +2,6 @@
 \#~\#
 sh.db
 moul.trace.*
+examples
+!examples/*.sh
+!examples/*.bdsh

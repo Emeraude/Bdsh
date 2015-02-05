@@ -136,7 +136,6 @@ db_del() {
 	key="$true_arg";
 	get_true_arg "$2";
 	val="$true_arg";
-	# break if error ?
 	for line in $(get_line_number_by_exact_line "$key" "$val")
 	do
 	    sed -i -- "$line"d "$file_name";
